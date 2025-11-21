@@ -1,0 +1,58 @@
+
+╔══════════════════════════════════════════════════════════════════╗
+║                    🏥 RELATÓRIO DE DIAGNÓSTICO                   ║
+║                      11/11/2025 às 16:03:01                     ║
+╚══════════════════════════════════════════════════════════════════╝
+
+👤 DADOS DO PACIENTE:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• Nome: Felizardo Manuel
+• Idade: 28 anos
+• Gênero: Masculino
+• Pressão Arterial: Normal
+• Colesterol: Não informado
+
+🔍 SINTOMAS REPORTADOS:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  1. ✅ Febre
+  2. ✅ Fadiga
+  3. ✅ Dor de Cabeça
+  4. ✅ Náusea
+  5. ✅ Dor no Peito
+
+⏰ INFORMAÇÕES TEMPORAIS:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• Duração dos sintomas: 2-4 semanas
+• Intensidade geral: Moderada (4-6)
+
+🎯 RESULTADO DO DIAGNÓSTICO:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🟢 STATUS: NEGATIVO para condição específica
+
+🏥 DIAGNÓSTICO SUGERIDO: Gripe
+
+📊 CONFIANÇA DO MODELO IA:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• Probabilidade Negativa: 57.6%
+• Probabilidade Positiva: 42.4%
+• Nível de Confiança: Baixo
+
+💡 RECOMENDAÇÕES:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• Mantenha repouso
+• Hidrate-se bem
+• Use medicação sintomática se necessário
+• Procure médico se piorar
+
+⚠️  AVISO MÉDICO IMPORTANTE:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Este diagnóstico é uma ESTIMATIVA baseada em inteligência artificial
+e dados históricos. NÃO substitui uma consulta médica profissional.
+
+Para diagnóstico definitivo e tratamento adequado:
+• Procure um médico qualificado
+• Realize exames específicos se necessário
+• Siga orientações médicas profissionais
+
+Sistema desenvolvido para fins educacionais - INAR 2025
+

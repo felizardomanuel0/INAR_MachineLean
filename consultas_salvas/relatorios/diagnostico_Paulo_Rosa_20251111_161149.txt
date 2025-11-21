@@ -1,0 +1,58 @@
+
+╔══════════════════════════════════════════════════════════════════╗
+║                    🏥 RELATÓRIO DE DIAGNÓSTICO                   ║
+║                      11/11/2025 às 16:11:39                     ║
+╚══════════════════════════════════════════════════════════════════╝
+
+👤 DADOS DO PACIENTE:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• Nome: Paulo Rosa
+• Idade: 30 anos
+• Gênero: Masculino
+• Pressão Arterial: Não informado
+• Colesterol: Não informado
+
+🔍 SINTOMAS REPORTADOS:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  1. ✅ Dor no Peito
+  2. ✅ Dificuldade para Respirar
+  3. ✅ Batimento Cardíaco Irregular
+  4. ✅ Dificuldade De Respira Fundo
+  5. ✅ Dor No Peito Ao Se Mover
+  6. ✅ Dor No Coracao
+
+⏰ INFORMAÇÕES TEMPORAIS:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• Duração dos sintomas: Crônico (mais de 1 ano)
+• Intensidade geral: Moderada (4-6)
+
+🎯 RESULTADO DO DIAGNÓSTICO:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🟢 STATUS: NEGATIVO para condição específica
+
+🏥 DIAGNÓSTICO SUGERIDO: Problema Respiratório
+
+📊 CONFIANÇA DO MODELO IA:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• Probabilidade Negativa: 82.4%
+• Probabilidade Positiva: 17.6%
+• Nível de Confiança: Alto
+
+💡 RECOMENDAÇÕES:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• Procure orientação médica para avaliação adequada
+• Monitore a evolução dos sintomas
+• Mantenha hábitos saudáveis
+
+⚠️  AVISO MÉDICO IMPORTANTE:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Este diagnóstico é uma ESTIMATIVA baseada em inteligência artificial
+e dados históricos. NÃO substitui uma consulta médica profissional.
+
+Para diagnóstico definitivo e tratamento adequado:
+• Procure um médico qualificado
+• Realize exames específicos se necessário
+• Siga orientações médicas profissionais
+
+Sistema desenvolvido para fins educacionais - INAR 2025
+
