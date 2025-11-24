@@ -1,0 +1,1 @@
+# Pacote src do Sistema de Diagnóstico Médico Simplificado

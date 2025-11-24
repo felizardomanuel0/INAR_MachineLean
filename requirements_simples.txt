@@ -1,0 +1,28 @@
+# Dependências do Sistema de Diagnóstico Médico Simplificado
+# Instalar com: sudo apt install -y python3-pandas python3-numpy python3-sklearn python3-tk
+
+# Pacotes principais
+pandas>=1.3.0        # Manipulação de dados
+numpy>=1.20.0         # Cálculos numéricos
+scikit-learn>=1.0.0   # Não usado diretamente, mas pode ser útil para expansões futuras
+
+# Interface gráfica
+tkinter              # Incluído no Python3, mas pode precisar do pacote python3-tk no Ubuntu/Debian
+
+# Bibliotecas padrão (já incluídas no Python)
+logging              # Sistema de logs
+datetime             # Manipulação de datas
+typing               # Type hints
+pathlib              # Manipulação de caminhos
+os                   # Operações do sistema
+sys                  # Configurações do sistema
+
+# Instalação no Ubuntu/Debian:
+# sudo apt update
+# sudo apt install -y python3-pandas python3-numpy python3-sklearn python3-tk
+
+# Para outros sistemas, usar pip:
+# pip install pandas numpy scikit-learn
+
+# Nota: tkinter geralmente vem instalado com Python, mas em alguns sistemas Linux
+# pode ser necessário instalar separadamente com python3-tk
