@@ -6,6 +6,8 @@ Funciona apenas com o arquivo dados.csv
 import pandas as pd
 import numpy as np
 import logging
+import json
+import os
 from typing import Dict, List, Tuple
 from datetime import datetime
 import sys
@@ -30,6 +32,16 @@ class SistemaDiagnosticoSimples:
         self.carregador = CarregadorDadosSimplificado(caminho_dados)
         self.dados_carregados = False
         self.historico_diagnosticos = []
+        self.sintomas_personalizados = []  # Lista de sintomas adicionados manualmente
+        
+        # Configurar caminhos para armazenamento
+        self.diretorio_dados = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+        self.arquivo_consultas = os.path.join(self.diretorio_dados, 'consultas_realizadas.json')
+        self.arquivo_sintomas_custom = os.path.join(self.diretorio_dados, 'sintomas_personalizados.json')
+        
+        # Carregar dados salvos
+        self._carregar_consultas_salvas()
+        self._carregar_sintomas_personalizados()
         
         # Carregar dados automaticamente
         self._carregar_dados()
@@ -71,7 +83,7 @@ class SistemaDiagnosticoSimples:
         
         return self.carregador.obter_doencas_ordenadas()
     
-    def realizar_diagnostico(self, sintomas_selecionados: List[str]) -> Dict:
+    def realizar_diagnostico(self, sintomas_selecionados: List[str], dados_paciente: Dict = None) -> Dict:
         """
         Realiza diagnóstico baseado nos sintomas selecionados
         
@@ -121,11 +133,15 @@ class SistemaDiagnosticoSimples:
                 'diagnosticos': diagnosticos_processados,
                 'total_diagnosticos': len(diagnosticos_processados),
                 'timestamp': datetime.now().isoformat(),
-                'confiabilidade_geral': self._calcular_confiabilidade_geral(diagnosticos_processados)
+                'confiabilidade_geral': self._calcular_confiabilidade_geral(diagnosticos_processados),
+                'dados_paciente': dados_paciente if dados_paciente else {}
             }
             
             # Adicionar ao histórico
             self.historico_diagnosticos.append(resultado_final)
+            
+            # Salvar consulta permanentemente
+            self._salvar_consulta(resultado_final)
             
             logger.info(f"Diagnóstico realizado: {len(diagnosticos_processados)} possibilidades encontradas")
             
@@ -247,6 +263,214 @@ class SistemaDiagnosticoSimples:
         """Limpa o histórico de diagnósticos"""
         self.historico_diagnosticos.clear()
         logger.info("Histórico de diagnósticos limpo")
+    
+    def _carregar_consultas_salvas(self):
+        """Carrega consultas salvas de arquivo JSON"""
+        try:
+            if os.path.exists(self.arquivo_consultas):
+                with open(self.arquivo_consultas, 'r', encoding='utf-8') as f:
+                    consultas_salvas = json.load(f)
+                    # Carregar apenas as últimas 50 consultas para o histórico
+                    self.historico_diagnosticos = consultas_salvas[-50:] if len(consultas_salvas) > 50 else consultas_salvas
+                logger.info(f"Carregadas {len(self.historico_diagnosticos)} consultas do histórico")
+        except Exception as e:
+            logger.warning(f"Erro ao carregar consultas salvas: {e}")
+            self.historico_diagnosticos = []
+    
+    def _carregar_sintomas_personalizados(self):
+        """Carrega sintomas personalizados de arquivo JSON"""
+        try:
+            if os.path.exists(self.arquivo_sintomas_custom):
+                with open(self.arquivo_sintomas_custom, 'r', encoding='utf-8') as f:
+                    self.sintomas_personalizados = json.load(f)
+                logger.info(f"Carregados {len(self.sintomas_personalizados)} sintomas personalizados")
+        except Exception as e:
+            logger.warning(f"Erro ao carregar sintomas personalizados: {e}")
+            self.sintomas_personalizados = []
+    
+    def _salvar_consulta(self, consulta: Dict):
+        """Salva consulta em arquivo JSON"""
+        try:
+            # Carregar consultas existentes
+            consultas_existentes = []
+            if os.path.exists(self.arquivo_consultas):
+                with open(self.arquivo_consultas, 'r', encoding='utf-8') as f:
+                    consultas_existentes = json.load(f)
+            
+            # Adicionar nova consulta
+            consultas_existentes.append(consulta)
+            
+            # Manter apenas últimas 1000 consultas
+            if len(consultas_existentes) > 1000:
+                consultas_existentes = consultas_existentes[-1000:]
+            
+            # Salvar arquivo
+            with open(self.arquivo_consultas, 'w', encoding='utf-8') as f:
+                json.dump(consultas_existentes, f, ensure_ascii=False, indent=2)
+                
+        except Exception as e:
+            logger.error(f"Erro ao salvar consulta: {e}")
+    
+    def adicionar_sintoma_personalizado(self, sintoma: str) -> bool:
+        """
+        Adiciona um sintoma personalizado à lista
+        
+        Args:
+            sintoma (str): Sintoma a ser adicionado
+            
+        Returns:
+            bool: True se adicionado com sucesso
+        """
+        try:
+            sintoma_limpo = sintoma.strip().title()
+            
+            if not sintoma_limpo:
+                return False
+            
+            # Verificar se já existe
+            if sintoma_limpo not in self.sintomas_personalizados:
+                self.sintomas_personalizados.append(sintoma_limpo)
+                self._salvar_sintomas_personalizados()
+                logger.info(f"Sintoma personalizado adicionado: {sintoma_limpo}")
+                return True
+            
+            return False
+            
+        except Exception as e:
+            logger.error(f"Erro ao adicionar sintoma personalizado: {e}")
+            return False
+    
+    def _salvar_sintomas_personalizados(self):
+        """Salva sintomas personalizados em arquivo JSON"""
+        try:
+            with open(self.arquivo_sintomas_custom, 'w', encoding='utf-8') as f:
+                json.dump(self.sintomas_personalizados, f, ensure_ascii=False, indent=2)
+        except Exception as e:
+            logger.error(f"Erro ao salvar sintomas personalizados: {e}")
+    
+    def obter_todos_sintomas(self) -> List[str]:
+        """
+        Retorna todos os sintomas disponíveis (originais + personalizados)
+        
+        Returns:
+            List[str]: Lista completa de sintomas
+        """
+        sintomas_originais = self.obter_sintomas_disponiveis() if self.dados_carregados else []
+        todos_sintomas = list(set(sintomas_originais + self.sintomas_personalizados))
+        return sorted(todos_sintomas)
+    
+    def obter_consultas_por_paciente(self, nome_paciente: str) -> List[Dict]:
+        """
+        Obtém consultas de um paciente específico
+        
+        Args:
+            nome_paciente (str): Nome do paciente
+            
+        Returns:
+            List[Dict]: Lista de consultas do paciente
+        """
+        try:
+            consultas_paciente = []
+            
+            # Buscar no histórico atual
+            for consulta in self.historico_diagnosticos:
+                dados_paciente = consulta.get('dados_paciente', {})
+                if dados_paciente.get('nome', '').lower() == nome_paciente.lower():
+                    consultas_paciente.append(consulta)
+            
+            # Buscar no arquivo completo se necessário
+            if os.path.exists(self.arquivo_consultas):
+                with open(self.arquivo_consultas, 'r', encoding='utf-8') as f:
+                    todas_consultas = json.load(f)
+                    for consulta in todas_consultas:
+                        dados_paciente = consulta.get('dados_paciente', {})
+                        if dados_paciente.get('nome', '').lower() == nome_paciente.lower():
+                            # Evitar duplicatas
+                            if consulta not in consultas_paciente:
+                                consultas_paciente.append(consulta)
+            
+            # Ordenar por timestamp (mais recente primeiro)
+            consultas_paciente.sort(key=lambda x: x.get('timestamp', ''), reverse=True)
+            
+            return consultas_paciente
+            
+        except Exception as e:
+            logger.error(f"Erro ao buscar consultas do paciente: {e}")
+            return []
+    
+    def obter_estatisticas_consultas(self) -> Dict:
+        """
+        Obtém estatísticas das consultas realizadas
+        
+        Returns:
+            Dict: Estatísticas das consultas
+        """
+        try:
+            total_consultas = 0
+            pacientes_unicos = set()
+            sintomas_mais_comuns = {}
+            doencas_mais_diagnosticadas = {}
+            
+            # Contar consultas no arquivo
+            if os.path.exists(self.arquivo_consultas):
+                with open(self.arquivo_consultas, 'r', encoding='utf-8') as f:
+                    todas_consultas = json.load(f)
+                    total_consultas = len(todas_consultas)
+                    
+                    for consulta in todas_consultas:
+                        # Pacientes únicos
+                        dados_paciente = consulta.get('dados_paciente', {})
+                        nome = dados_paciente.get('nome', '').strip()
+                        if nome:
+                            pacientes_unicos.add(nome.lower())
+                        
+                        # Sintomas mais comuns
+                        for sintoma in consulta.get('sintomas_entrada', []):
+                            sintomas_mais_comuns[sintoma] = sintomas_mais_comuns.get(sintoma, 0) + 1
+                        
+                        # Doenças mais diagnosticadas
+                        diagnosticos = consulta.get('diagnosticos', [])
+                        if diagnosticos:
+                            doenca = diagnosticos[0].get('doenca', '')
+                            if doenca:
+                                doencas_mais_diagnosticadas[doenca] = doencas_mais_diagnosticadas.get(doenca, 0) + 1
+            
+            # Top 5 sintomas e doenças
+            top_sintomas = sorted(sintomas_mais_comuns.items(), key=lambda x: x[1], reverse=True)[:5]
+            top_doencas = sorted(doencas_mais_diagnosticadas.items(), key=lambda x: x[1], reverse=True)[:5]
+            
+            return {
+                'total_consultas': total_consultas,
+                'pacientes_unicos': len(pacientes_unicos),
+                'sintomas_personalizados': len(self.sintomas_personalizados),
+                'top_sintomas': top_sintomas,
+                'top_doencas': top_doencas
+            }
+            
+        except Exception as e:
+            logger.error(f"Erro ao calcular estatísticas: {e}")
+            return {}
+    
+    def remover_sintoma_personalizado(self, sintoma: str) -> bool:
+        """
+        Remove um sintoma personalizado
+        
+        Args:
+            sintoma (str): Sintoma a ser removido
+            
+        Returns:
+            bool: True se removido com sucesso
+        """
+        try:
+            if sintoma in self.sintomas_personalizados:
+                self.sintomas_personalizados.remove(sintoma)
+                self._salvar_sintomas_personalizados()
+                logger.info(f"Sintoma personalizado removido: {sintoma}")
+                return True
+            return False
+        except Exception as e:
+            logger.error(f"Erro ao remover sintoma personalizado: {e}")
+            return False
 
 def main():
     """Função para testar o sistema"""

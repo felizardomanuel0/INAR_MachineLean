@@ -6,16 +6,28 @@ Autor: Sistema de Diagnóstico de Doenças
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import seaborn as sns
 from sklearn.metrics import (
     accuracy_score, precision_score, recall_score, f1_score,
     confusion_matrix, classification_report, roc_curve, auc,
     precision_recall_curve, average_precision_score
 )
 from sklearn.model_selection import learning_curve, validation_curve
-import plotly.express as px
-import plotly.graph_objects as go
-from plotly.subplots import make_subplots
+
+# Importações opcionais
+try:
+    import plotly.express as px
+    PLOTLY_AVAILABLE = True
+except ImportError:
+    PLOTLY_AVAILABLE = False
+    print("⚠️  Plotly não está instalado. Instale com: pip install plotly")
+
+try:
+    import seaborn as sns
+    SEABORN_AVAILABLE = True
+except ImportError:
+    SEABORN_AVAILABLE = False
+    print("⚠️  Seaborn não está instalado. Instale com: pip install seaborn")
+
 from typing import Dict, List, Tuple, Any
 import warnings
 warnings.filterwarnings('ignore')
@@ -80,9 +92,22 @@ class AvaliadorModelos:
         cm = confusion_matrix(y_true, y_pred)
         
         plt.figure(figsize=(8, 6))
-        sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', 
-                   xticklabels=self.nomes_classes, 
-                   yticklabels=self.nomes_classes)
+        
+        if SEABORN_AVAILABLE:
+            sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', 
+                       xticklabels=self.nomes_classes, 
+                       yticklabels=self.nomes_classes)
+        else:
+            # Usar matplotlib nativo se seaborn não estiver disponível
+            plt.imshow(cm, cmap='Blues')
+            # Adicionar anotações
+            for i in range(len(cm)):
+                for j in range(len(cm[0])):
+                    plt.text(j, i, str(cm[i, j]), ha='center', va='center')
+            plt.xticks(range(len(self.nomes_classes)), self.nomes_classes)
+            plt.yticks(range(len(self.nomes_classes)), self.nomes_classes)
+            plt.colorbar()
+        
         plt.title(titulo, fontsize=16, fontweight='bold')
         plt.xlabel('Predição', fontsize=12)
         plt.ylabel('Valor Real', fontsize=12)
@@ -214,7 +239,14 @@ class AvaliadorModelos:
         
         # Gráfico de barras comparativo
         plt.figure(figsize=(12, 8))
-        sns.barplot(data=df_comparacao, x='Métrica', y='Valor', hue='Modelo')
+        
+        if SEABORN_AVAILABLE:
+            sns.barplot(data=df_comparacao, x='Métrica', y='Valor', hue='Modelo')
+        else:
+            # Usar matplotlib nativo se seaborn não estiver disponível
+            grouped = df_comparacao.groupby(['Métrica', 'Modelo'])['Valor'].first().unstack()
+            grouped.plot(kind='bar', width=0.8)
+        
         plt.title('Comparação de Desempenho dos Modelos', fontsize=16, fontweight='bold')
         plt.ylabel('Score')
         plt.ylim(0, 1)

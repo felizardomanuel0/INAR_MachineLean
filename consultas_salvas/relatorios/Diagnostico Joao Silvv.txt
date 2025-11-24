@@ -1,0 +1,47 @@
+
+RELATÓRIO DE CONSULTA MÉDICA
+==================================================
+
+DADOS DO PACIENTE:
+• Nome: João Silva
+• Idade: 35
+• Bairro: Centro
+• Tempo dos sintomas: 2-4 semanas
+
+SINTOMAS REPORTADOS:
+• Febre Alta
+• Calafrios
+• Tremores
+• Sudorese
+• Dor De Cabeça
+
+RESULTADOS DO DIAGNÓSTICO:
+Total de possibilidades analisadas: 3
+Confiabilidade geral: Alta confiabilidade
+
+TOP 3 DIAGNÓSTICOS:
+
+1. Malária
+   Probabilidade: 70.0%
+   Nível de confiança: Alta
+   Sintomas em comum: 4/8
+
+2. Alergia
+   Probabilidade: 60.0%
+   Nível de confiança: Média
+   Sintomas em comum: 2/4
+
+3. Febre tifoide
+   Probabilidade: 35.5%
+   Nível de confiança: Baixa
+   Sintomas em comum: 3/11
+
+
+OBSERVAÇÕES:
+• Data da consulta: 2025-11-24 17:26:17
+• Este relatório é gerado automaticamente pelo sistema
+• Sempre consulte um médico profissional para confirmação
+
+AVISO IMPORTANTE:
+Este sistema é apenas para fins educacionais e de apoio.
+Não substitui a consulta médica profissional.

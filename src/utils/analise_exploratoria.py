@@ -6,17 +6,36 @@ Autor: Sistema de Diagnóstico de Doenças
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import seaborn as sns
-import plotly.express as px
-import plotly.graph_objects as go
-from plotly.subplots import make_subplots
 from typing import Dict, List, Tuple, Optional
 import warnings
 warnings.filterwarnings('ignore')
 
+# Importações opcionais
+try:
+    import plotly.express as px
+    import plotly.graph_objects as go
+    from plotly.subplots import make_subplots
+    PLOTLY_AVAILABLE = True
+except ImportError:
+    PLOTLY_AVAILABLE = False
+    print("⚠️  Plotly não está instalado. Instale com: pip install plotly")
+
+try:
+    import seaborn as sns
+    SEABORN_AVAILABLE = True
+except ImportError:
+    SEABORN_AVAILABLE = False
+    print("⚠️  Seaborn não está instalado. Instale com: pip install seaborn")
+
 # Configurar estilo dos gráficos
-plt.style.use('seaborn-v0_8')
-sns.set_palette("husl")
+try:
+    plt.style.use('seaborn-v0_8')
+except:
+    # Se seaborn não estiver disponível, usar estilo padrão
+    plt.style.use('default')
+
+if SEABORN_AVAILABLE:
+    sns.set_palette("husl")
 
 class AnalisadorExploratorio:
     """Classe para realizar análise exploratória completa dos dados"""
@@ -210,8 +229,18 @@ class AnalisadorExploratorio:
         
         plt.figure(figsize=(12, 10))
         mask = np.triu(np.ones_like(correlacao, dtype=bool))
-        sns.heatmap(correlacao, mask=mask, annot=True, cmap='RdYlBu_r', center=0,
-                   square=True, linewidths=0.5, cbar_kws={"shrink": .8})
+        
+        if SEABORN_AVAILABLE:
+            sns.heatmap(correlacao, mask=mask, annot=True, cmap='RdYlBu_r', center=0,
+                       square=True, linewidths=0.5, cbar_kws={"shrink": .8})
+        else:
+            # Usar matplotlib nativo se seaborn não estiver disponível
+            plt.imshow(correlacao, cmap='RdYlBu_r', aspect='auto')
+            plt.colorbar()
+            # Adicionar labels
+            plt.xticks(range(len(correlacao.columns)), correlacao.columns, rotation=45)
+            plt.yticks(range(len(correlacao.columns)), correlacao.columns)
+        
         plt.title('Matriz de Correlação entre Sintomas e Outcome', fontsize=16, fontweight='bold')
         plt.tight_layout()
         
@@ -248,7 +277,13 @@ class AnalisadorExploratorio:
         
         # Boxplot idade por outcome
         if 'Age' in self.dados.columns and 'Outcome Variable' in self.dados.columns:
-            sns.boxplot(data=self.dados, x='Outcome Variable', y='Age', ax=axes[1, 0])
+            if SEABORN_AVAILABLE:
+                sns.boxplot(data=self.dados, x='Outcome Variable', y='Age', ax=axes[1, 0])
+            else:
+                # Usar matplotlib nativo para boxplot
+                grupos = self.dados.groupby('Outcome Variable')['Age'].apply(list)
+                axes[1, 0].boxplot([grupos[group] for group in grupos.index], 
+                                  labels=grupos.index)
             axes[1, 0].set_title('Distribuição de Idade por Outcome', fontweight='bold')
         
         # Distribuição de gênero por outcome

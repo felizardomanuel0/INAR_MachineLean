@@ -1,0 +1,47 @@
+
+RELATÓRIO DE CONSULTA MÉDICA
+==================================================
+
+DADOS DO PACIENTE:
+• Nome: Manuel Joao
+• Idade: 35
+• Bairro: Matacuane
+• Tempo dos sintomas: 1-2 semanas
+
+SINTOMAS REPORTADOS:
+• Febre Alta
+• Sudorese
+• Calafrios
+• Tremores
+• Dor De Cabeça
+
+RESULTADOS DO DIAGNÓSTICO:
+Total de possibilidades analisadas: 3
+Confiabilidade geral: Alta confiabilidade
+
+TOP 3 DIAGNÓSTICOS:
+
+1. Malária
+   Probabilidade: 70.0%
+   Nível de confiança: Alta
+   Sintomas em comum: 4/8
+
+2. Alergia
+   Probabilidade: 60.0%
+   Nível de confiança: Média
+   Sintomas em comum: 2/4
+
+3. Febre tifoide
+   Probabilidade: 35.5%
+   Nível de confiança: Baixa
+   Sintomas em comum: 3/11
+
+
+OBSERVAÇÕES:
+• Data da consulta: 2025-11-24 17:37:37
+• Este relatório é gerado automaticamente pelo sistema
+• Sempre consulte um médico profissional para confirmação
+
+AVISO IMPORTANTE:
+Este sistema é apenas para fins educacionais e de apoio.
+Não substitui a consulta médica profissional.

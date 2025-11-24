@@ -1,0 +1,210 @@
+[
+  {
+    "sintomas_entrada": [
+      "Coceira",
+      "Erupção Cutânea",
+      "Erupções Cutâneas Nodulares"
+    ],
+    "total_sintomas_entrada": 3,
+    "diagnosticos": [
+      {
+        "doenca": "Infecção fúngica",
+        "probabilidade": 95,
+        "nivel_confianca": "Alta",
+        "sintomas_comum": [
+          "Erupções Cutâneas Nodulares",
+          "Coceira",
+          "Erupção Cutânea"
+        ],
+        "sintomas_em_comum_count": 3,
+        "total_sintomas_doenca": 4
+      },
+      {
+        "doenca": "Reação medicamentosa",
+        "probabilidade": 53.33333333333333,
+        "nivel_confianca": "Média",
+        "sintomas_comum": [
+          "Coceira",
+          "Erupção Cutânea"
+        ],
+        "sintomas_em_comum_count": 2,
+        "total_sintomas_doenca": 5
+      },
+      {
+        "doenca": "Acne",
+        "probabilidade": 29.166666666666668,
+        "nivel_confianca": "Baixa",
+        "sintomas_comum": [
+          "Erupção Cutânea"
+        ],
+        "sintomas_em_comum_count": 1,
+        "total_sintomas_doenca": 4
+      }
+    ],
+    "total_diagnosticos": 3,
+    "timestamp": "2025-11-24T17:00:03.166388",
+    "confiabilidade_geral": "Alta confiabilidade",
+    "dados_paciente": {}
+  },
+  {
+    "sintomas_entrada": [
+      "Febre Alta",
+      "Calafrios",
+      "Tremores",
+      "Sudorese",
+      "Dor De Cabeça"
+    ],
+    "total_sintomas_entrada": 5,
+    "diagnosticos": [
+      {
+        "doenca": "Malária",
+        "probabilidade": 70.0,
+        "nivel_confianca": "Alta",
+        "sintomas_comum": [
+          "Dor De Cabeça",
+          "Febre Alta",
+          "Calafrios",
+          "Sudorese"
+        ],
+        "sintomas_em_comum_count": 4,
+        "total_sintomas_doenca": 8
+      },
+      {
+        "doenca": "Alergia",
+        "probabilidade": 60.0,
+        "nivel_confianca": "Média",
+        "sintomas_comum": [
+          "Calafrios",
+          "Tremores"
+        ],
+        "sintomas_em_comum_count": 2,
+        "total_sintomas_doenca": 4
+      },
+      {
+        "doenca": "Febre tifoide",
+        "probabilidade": 35.45454545454545,
+        "nivel_confianca": "Baixa",
+        "sintomas_comum": [
+          "Dor De Cabeça",
+          "Febre Alta",
+          "Calafrios"
+        ],
+        "sintomas_em_comum_count": 3,
+        "total_sintomas_doenca": 11
+      }
+    ],
+    "total_diagnosticos": 3,
+    "timestamp": "2025-11-24T17:07:43.494115",
+    "confiabilidade_geral": "Alta confiabilidade",
+    "dados_paciente": {
+      "nome": "Lucio Tomas",
+      "idade": "25",
+      "bairro": "Muchatazina",
+      "tempo_sintomas": "4-7 dias"
+    }
+  },
+  {
+    "sintomas_entrada": [
+      "Febre Alta",
+      "Calafrios",
+      "Tremores",
+      "Sudorese",
+      "Dor De Cabeça"
+    ],
+    "total_sintomas_entrada": 5,
+    "diagnosticos": [
+      {
+        "doenca": "Malária",
+        "probabilidade": 70.0,
+        "nivel_confianca": "Alta",
+        "sintomas_comum": [
+          "Sudorese",
+          "Dor De Cabeça",
+          "Febre Alta",
+          "Calafrios"
+        ],
+        "sintomas_em_comum_count": 4,
+        "total_sintomas_doenca": 8
+      },
+      {
+        "doenca": "Alergia",
+        "probabilidade": 60.0,
+        "nivel_confianca": "Média",
+        "sintomas_comum": [
+          "Tremores",
+          "Calafrios"
+        ],
+        "sintomas_em_comum_count": 2,
+        "total_sintomas_doenca": 4
+      },
+      {
+        "doenca": "Febre tifoide",
+        "probabilidade": 35.45454545454545,
+        "nivel_confianca": "Baixa",
+        "sintomas_comum": [
+          "Dor De Cabeça",
+          "Febre Alta",
+          "Calafrios"
+        ],
+        "sintomas_em_comum_count": 3,
+        "total_sintomas_doenca": 11
+      }
+    ],
+    "total_diagnosticos": 3,
+    "timestamp": "2025-11-24T17:26:17.881751",
+    "confiabilidade_geral": "Alta confiabilidade",
+    "dados_paciente": {}
+  },
+  {
+    "sintomas_entrada": [
+      "Febre Alta",
+      "Sudorese",
+      "Calafrios",
+      "Tremores",
+      "Dor De Cabeça"
+    ],
+    "total_sintomas_entrada": 5,
+    "diagnosticos": [
+      {
+        "doenca": "Malária",
+        "probabilidade": 70.0,
+        "nivel_confianca": "Alta",
+        "sintomas_comum": [
+          "Dor De Cabeça",
+          "Febre Alta",
+          "Calafrios",
+          "Sudorese"
+        ],
+        "sintomas_em_comum_count": 4,
+        "total_sintomas_doenca": 8
+      },
+      {
+        "doenca": "Alergia",
+        "probabilidade": 60.0,
+        "nivel_confianca": "Média",
+        "sintomas_comum": [
+          "Tremores",
+          "Calafrios"
+        ],
+        "sintomas_em_comum_count": 2,
+        "total_sintomas_doenca": 4
+      },
+      {
+        "doenca": "Febre tifoide",
+        "probabilidade": 35.45454545454545,
+        "nivel_confianca": "Baixa",
+        "sintomas_comum": [
+          "Dor De Cabeça",
+          "Febre Alta",
+          "Calafrios"
+        ],
+        "sintomas_em_comum_count": 3,
+        "total_sintomas_doenca": 11
+      }
+    ],
+    "total_diagnosticos": 3,
+    "timestamp": "2025-11-24T17:37:37.467395",
+    "confiabilidade_geral": "Alta confiabilidade",
+    "dados_paciente": {}
+  }
+]

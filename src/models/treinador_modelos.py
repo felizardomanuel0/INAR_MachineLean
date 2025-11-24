@@ -11,7 +11,6 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.naive_bayes import GaussianNB
 from sklearn.tree import DecisionTreeClassifier
-from xgboost import XGBClassifier
 from sklearn.model_selection import GridSearchCV, cross_val_score
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix, classification_report
 import joblib
@@ -19,6 +18,14 @@ import os
 from typing import Dict, List, Tuple, Any
 import logging
 import time
+
+# Importação opcional do XGBoost
+try:
+    from xgboost import XGBClassifier
+    XGBOOST_AVAILABLE = True
+except ImportError:
+    XGBOOST_AVAILABLE = False
+    print("⚠️  XGBoost não está instalado. Instale com: pip install xgboost")
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -101,9 +108,12 @@ class TreinadorModelos:
                     'learning_rate': [0.1, 0.01],
                     'max_depth': [3, 5]
                 }
-            },
-            
-            'XGBoost': {
+            }
+        }
+        
+        # Adicionar XGBoost apenas se estiver disponível
+        if XGBOOST_AVAILABLE:
+            self.modelos['XGBoost'] = {
                 'modelo': XGBClassifier(random_state=42, eval_metric='logloss'),
                 'parametros': {
                     'n_estimators': [50, 100],
@@ -111,7 +121,6 @@ class TreinadorModelos:
                     'max_depth': [3, 6]
                 }
             }
-        }
     
     def treinar_modelo_individual(self, nome_modelo: str, X_train: pd.DataFrame, y_train: pd.Series,
                                  usar_grid_search: bool = True, cv_folds: int = 5) -> Dict:
